@@ -92,15 +92,6 @@
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   })[character]);
 
-  const printLetterButton = document.querySelector("[data-print-letter]");
-  if (printLetterButton) {
-    printLetterButton.addEventListener("click", () => {
-      document.body.classList.add("printing-letter");
-      window.addEventListener("afterprint", () => document.body.classList.remove("printing-letter"), { once: true });
-      window.print();
-    });
-  }
-
   const subjectKey = document.body.dataset.subject;
   const manifestPath = subjectKey && window.ARCHIVE_MANIFESTS?.[subjectKey];
   if (!subjectKey || !manifestPath) return;
@@ -121,20 +112,17 @@
   const employmentCount = document.getElementById("employment-result-count");
   const fieldTripList = document.getElementById("field-trip-document-list");
   const supportingList = document.getElementById("supporting-document-list");
-  const seminarEmptyNote = document.getElementById("seminars-empty-note");
-  const fieldTripsEmptyNote = document.getElementById("field-trips-empty-note");
-  const supportingEmptyNote = document.getElementById("supporting-empty-note");
-  if (!list || !emptyState || !searchInput || !categoryFilter || !sortSelect || !count || !timeline || !dialog) return;
+  if (!list || !emptyState || !searchInput || !categoryFilter || !sortSelect || !count || !dialog) return;
 
   const collectionLists = [list, fieldTripList, supportingList].filter(Boolean);
   const archiveGroups = subjectKey === "seminars" ? [
-    { key: "seminars", list, emptyNote: seminarEmptyNote },
-    { key: "field-trips", list: fieldTripList, emptyNote: fieldTripsEmptyNote },
-    { key: "supporting", list: supportingList, emptyNote: supportingEmptyNote }
-  ].filter((group) => group.list && group.emptyNote) : [];
+    { key: "seminars", list },
+    { key: "field-trips", list: fieldTripList },
+    { key: "supporting", list: supportingList }
+  ].filter((group) => group.list) : [];
 
   const categoriesBySubject = {
-    ai: ["Activities", "Assignments", "Projects", "Research", "Presentations", "Other"],
+    ai: ["Laboratory Activities", "Programming Exercises", "Assignments", "Practical Examinations", "Research", "Other"],
     emerging: [
       "AWS Cloud Fundamentals", "AWS Core Services", "AWS Security", "Cloud Architecture",
       "AWS Academy Laboratories", "Pricing and Billing", "Certification Review", "Projects and Practical Applications"
@@ -210,6 +198,10 @@
   const getExtension = (path = "") => path.split("?")[0].split("#")[0].split(".").pop()?.toLowerCase() || "";
 
   const setEmptyState = (kind, message) => {
+    if (kind === "collection") {
+      emptyState.hidden = true;
+      return;
+    }
     emptyState.hidden = false;
     emptyState.dataset.empty = kind;
     const heading = emptyState.querySelector(".empty-copy h3");
@@ -227,10 +219,6 @@
       code.textContent = "NO MATCH / 00";
       heading.textContent = "No records match this view.";
       paragraph.textContent = "Try a different search or choose another category to see more of the collection.";
-    } else {
-      code.textContent = "CATALOGUE / 00";
-      heading.textContent = "No files in this collection yet.";
-      paragraph.textContent = "When academic files are added, they will appear here with searchable details and available reading options.";
     }
   };
 
@@ -254,18 +242,39 @@
     };
   };
 
+  const renderAiArtifactDetails = (work, filename) => {
+    const reflection = work.reflection && typeof work.reflection === "object" ? work.reflection : {};
+    const fields = [];
+    if (String(work.description || "").trim()) fields.push(["Description / purpose", work.description]);
+    if (String(reflection.learning || "").trim()) fields.push(["What I learned", reflection.learning]);
+    if (String(reflection.challenges || "").trim()) fields.push(["Challenges encountered", reflection.challenges]);
+    if (String(reflection.goalConnection || "").trim()) fields.push(["Connection to goals", reflection.goalConnection]);
+    if (work.fileUrl) {
+      fields.push(["Supporting evidence", `<a href="${escapeHTML(work.fileUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(filename)}</a>`, true]);
+    }
+    if (!fields.length) return "";
+    return `<details class="ai-artifact-details">
+      <summary>Artifact details</summary>
+      <dl class="ai-field-list">
+        ${fields.map(([label, value, isHtml]) => `<div><dt>${escapeHTML(label)}</dt><dd>${isHtml ? value : escapeHTML(value).replace(/\n/g, "<br>")}</dd></div>`).join("")}
+      </dl>
+    </details>`;
+  };
+
   const makeDocumentRow = (work, options = {}) => {
-    const title = escapeHTML(work.title || "Untitled record");
+    const title = escapeHTML(work.title || "");
     const category = escapeHTML(work.category);
     const format = escapeHTML(work.type ? work.type.toUpperCase() : "LINK");
-    const filename = work.file?.split("/").pop() || work.title || "file";
-    const date = options.showDate === false || !work.date ? "" : `<time datetime="${escapeHTML(work.date)}">${escapeHTML(work.date)}</time>`;
+    const filename = work.file?.split("/").pop() || work.title || "";
+    const date = options.showDate === false || !work.date
+      ? ""
+      : `<time datetime="${escapeHTML(work.date)}">${escapeHTML(work.date)}</time>`;
     const filenameFact = options.showFilename && work.file ? `<span class="document-filename">FILE ${escapeHTML(filename)}</span>` : "";
     const tag = escapeHTML(options.tag || (subjectKey === "ai" ? "AI—II" : subjectKey === "emerging" ? "ET—026" : "SFT—026"));
     let openAction = "";
     if (work.fileUrl && work.type === "pdf") {
       openAction = `<button class="document-open" type="button" data-preview-url="${escapeHTML(work.fileUrl)}" data-preview-kind="pdf" data-preview-title="${title}" data-preview-name="${escapeHTML(filename)}">Open Document <span aria-hidden="true">↗</span></button>`;
-    } else if (work.fileUrl && subjectKey === "seminars" && ["png", "jpg", "jpeg"].includes(work.type)) {
+    } else if (work.fileUrl && ["ai", "seminars"].includes(subjectKey) && ["png", "jpg", "jpeg"].includes(work.type)) {
       openAction = `<button class="document-open" type="button" data-preview-url="${escapeHTML(work.fileUrl)}" data-preview-kind="image" data-preview-title="${title}" data-preview-name="${escapeHTML(filename)}">Open Image <span aria-hidden="true">↗</span></button>`;
     } else if (work.fileUrl && subjectKey === "ai" && ["py", "ipynb"].includes(work.type)) {
       const previewKind = work.type === "py" ? "code" : "notebook";
@@ -276,14 +285,16 @@
     } else if (work.externalUrl) {
       openAction = `<a class="document-open" href="${escapeHTML(work.externalUrl)}" target="_blank" rel="noopener noreferrer">Open Document <span aria-hidden="true">↗</span></a>`;
     }
+    const artifactDetails = subjectKey === "ai" ? renderAiArtifactDetails(work, filename) : "";
     const isImage = ["png", "jpg", "jpeg"].includes(work.type);
     const iconKind = work.type === "pdf" ? "is-pdf" : work.type === "py" ? "is-code" : work.type === "ipynb" ? "is-notebook" : isImage ? "is-image" : "";
     const iconLabel = work.type === "pdf" ? "PDF" : work.type === "py" ? "PY" : work.type === "ipynb" ? "NB" : isImage ? "IMG" : format.slice(0, 3);
-    return `<article class="document-row">
+    return `<article class="document-row${subjectKey === "ai" ? " ai-document-row" : ""}">
       <span class="document-file-icon ${iconKind}" aria-hidden="true"><span>${iconLabel}</span></span>
       <div class="document-main"><h3>${title}</h3><div class="document-facts"><span class="document-category">${category}</span><span class="document-type">${format}</span>${date}${filenameFact}</div></div>
       <span class="document-code" aria-hidden="true">${tag}</span>
       <div class="document-actions">${openAction}</div>
+      ${artifactDetails}
     </article>`;
   };
 
@@ -312,7 +323,9 @@
     const selectedCategory = categoryFilter.value.toLocaleLowerCase();
     const filtered = allWorks.filter((work) => {
       const matchesCategory = selectedCategory === "all" || work.category.toLocaleLowerCase() === selectedCategory;
-      const searchable = [work.title, work.description, work.category, work.date, work.file?.split("/").pop(), ...(work.tags || [])].join(" ").toLocaleLowerCase();
+      const reflection = work.reflection && typeof work.reflection === "object" ? work.reflection : {};
+      const aiMetadata = subjectKey === "ai" ? Object.values(reflection) : [];
+      const searchable = [work.title, work.description, work.category, work.date, work.file?.split("/").pop(), ...(work.tags || []), ...aiMetadata].join(" ").toLocaleLowerCase();
       return matchesCategory && (!query || searchable.includes(query));
     });
     if (subjectKey === "seminars") {
@@ -322,11 +335,6 @@
         group.list.innerHTML = groupedWorks.map((work) => makeDocumentRow(work, {
           showFilename: ["png", "jpg", "jpeg"].includes(work.type)
         })).join("");
-        const hasAnyInGroup = allWorks.some((work) => archiveGroupFor(work) === group.key);
-        const selectedCategoryGroup = selectedCategory === "all"
-          ? "all"
-          : archiveGroupFor({ category: selectedCategory });
-        group.emptyNote.hidden = hasAnyInGroup || (selectedCategoryGroup !== "all" && selectedCategoryGroup !== group.key);
       });
     } else {
       list.innerHTML = sortWorks(filtered, sortSelect).map((work) => makeDocumentRow(work)).join("");
@@ -339,6 +347,10 @@
 
   const setEmploymentEmptyState = (kind) => {
     if (!employmentEmptyState) return;
+    if (kind === "collection") {
+      employmentEmptyState.hidden = true;
+      return;
+    }
     employmentEmptyState.hidden = false;
     employmentEmptyState.dataset.empty = kind;
     const heading = employmentEmptyState.querySelector(".empty-copy h3");
@@ -356,10 +368,6 @@
       code.textContent = "NO MATCH / 00";
       heading.textContent = "No employment records match this view.";
       paragraph.textContent = "Try another file name or choose a different category.";
-    } else {
-      code.textContent = "EMPLOYMENT / 00";
-      heading.textContent = "No employment documents have been added yet.";
-      paragraph.textContent = "Supporting files will appear here with their file names, categories, and available preview options.";
     }
   };
 
@@ -382,10 +390,15 @@
   };
 
   const renderActivities = () => {
+    if (!timeline) return;
+    const timelineSection = timeline.closest(".timeline-section");
+    if (!timelineSection) return;
     const workActivities = allWorks
       .filter((work) => subjectKey === "seminars"
         ? Boolean(work.date) && ["seminars", "field trips", "event documentation"].includes(work.category.toLocaleLowerCase())
-        : work.category.toLocaleLowerCase() === "activities")
+        : subjectKey === "ai"
+          ? ["activities", "laboratory activities", "programming exercises"].includes(work.category.toLocaleLowerCase())
+          : work.category.toLocaleLowerCase() === "activities")
       .map((work) => ({ id: work.id, title: work.title, description: work.description || "", date: work.date || "" }));
     const activityMap = new Map();
     [...activities, ...workActivities].forEach((activity) => {
@@ -395,11 +408,134 @@
     const sorted = [...activityMap.values()]
       .filter((activity) => activity && activity.title)
       .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-    if (!sorted.length) return;
+    if (!sorted.length) {
+      timeline.replaceChildren();
+      timelineSection.hidden = true;
+      return;
+    }
+    timelineSection.hidden = false;
     timeline.innerHTML = sorted.map((activity) => {
-      const date = activity.date ? `<time class="timeline-date" datetime="${escapeHTML(activity.date)}">${escapeHTML(activity.date)}</time>` : `<span class="timeline-date">DATE NOT SET</span>`;
-      return `<article class="timeline-item">${date}<div class="timeline-body"><h3>${escapeHTML(activity.title)}</h3><p>${escapeHTML(activity.description || "")}</p></div><span class="timeline-mark" aria-hidden="true"></span></article>`;
+      const date = activity.date ? `<time class="timeline-date" datetime="${escapeHTML(activity.date)}">${escapeHTML(activity.date)}</time>` : "";
+      const description = activity.description ? `<p>${escapeHTML(activity.description)}</p>` : "";
+      return `<article class="timeline-item">${date}<div class="timeline-body"><h3>${escapeHTML(activity.title)}</h3>${description}</div><span class="timeline-mark" aria-hidden="true"></span></article>`;
     }).join("");
+  };
+
+  const renderAiPortfolio = (manifest) => {
+    if (subjectKey !== "ai") return;
+    const course = manifest.course && typeof manifest.course === "object" ? manifest.course : {};
+    const aboutMe = manifest.aboutMe && typeof manifest.aboutMe === "object" ? manifest.aboutMe : {};
+    const finalProject = manifest.finalProject && typeof manifest.finalProject === "object" ? manifest.finalProject : {};
+    const setText = (id, value) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      const text = String(value || "").trim();
+      if (!text) {
+        element.closest(".ai-about-field")?.remove();
+        return;
+      }
+      element.textContent = text;
+    };
+    const setList = (id, values) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      const items = Array.isArray(values) ? values.filter((value) => value && String(value).trim()) : [];
+      if (!items.length) {
+        element.closest(".ai-about-field")?.remove();
+        return;
+      }
+      element.innerHTML = items.map((value) => `<li>${escapeHTML(value)}</li>`).join("");
+    };
+    const evidenceList = (items) => {
+      const records = Array.isArray(items) ? items : [];
+      const links = records.map((item) => {
+        if (!item || typeof item !== "object") return "";
+        const href = item.file ? resolveManifestFile(item.file) : safeExternalUrl(item.url);
+        if (!href) return "";
+        const label = item.title || item.file?.split("/").pop() || href;
+        return `<li><a href="${escapeHTML(href)}" target="_blank" rel="noopener noreferrer">${escapeHTML(label)}</a></li>`;
+      }).filter(Boolean);
+      return links.join("");
+    };
+    const recordFields = (fields) => {
+      const populatedFields = fields.filter(([, value]) => String(value || "").trim());
+      if (!populatedFields.length) return "";
+      return `<dl class="ai-record-fields">${populatedFields.map(([label, value]) => `
+        <div><dt>${escapeHTML(label)}</dt><dd>${escapeHTML(value).replace(/\n/g, "<br>")}</dd></div>`).join("")}
+      </dl>`;
+    };
+    const renderRecords = (id, records, renderRecord) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      const entries = Array.isArray(records) ? records.filter((record) => record && typeof record === "object") : [];
+      const rendered = entries.map(renderRecord).filter(Boolean);
+      element.innerHTML = rendered.length ? `<div class="ai-entry-list">${rendered.join("")}</div>` : "";
+      const section = element.closest("section");
+      if (section) section.hidden = !rendered.length;
+    };
+    setText("ai-course-title", course.title);
+    setText("ai-student-name", course.studentName);
+    setText("ai-program", course.program);
+    setText("ai-course-code", course.courseCode);
+    setText("ai-school-year", course.academicYear);
+    setText("ai-semester", course.semester);
+    setText("ai-about-name", course.studentName);
+    setText("ai-about-program", course.program);
+    setText("ai-about-introduction", aboutMe.introduction);
+    setList("ai-about-interests", aboutMe.interests);
+
+    renderRecords("ai-achievements-list", manifest.achievements, (entry) => {
+      const title = String(entry.title || entry.name || "").trim();
+      if (!title) return "";
+      const fields = [
+        ["Type", entry.type],
+        ["Issuing organization", entry.issuer],
+        ["Completion date", entry.date],
+        ["Description", entry.description]
+      ];
+      const evidence = evidenceList(entry.evidence);
+      const evidenceFields = evidence
+        ? `<dl class="ai-record-fields"><div><dt>Supporting evidence</dt><dd><ul>${evidence}</ul></dd></div></dl>`
+        : "";
+      return `<article class="ai-record"><h3>${escapeHTML(title)}</h3>${recordFields(fields)}${evidenceFields}</article>`;
+    });
+
+    renderRecords("ai-skills-list", manifest.skills, (entry) => {
+      const title = String(entry.name || "").trim();
+      if (!title) return "";
+      const fields = [
+        ["Skill area", entry.category],
+        ["Evidence summary", entry.selfAssessment]
+      ];
+      const evidence = evidenceList(entry.evidence);
+      const evidenceFields = evidence
+        ? `<dl class="ai-record-fields"><div><dt>Supporting evidence</dt><dd><ul>${evidence}</ul></dd></div></dl>`
+        : "";
+      return `<article class="ai-record"><h3>${escapeHTML(title)}</h3>${recordFields(fields)}${evidenceFields}</article>`;
+    });
+
+    const finalTitle = document.getElementById("ai-final-title");
+    if (finalTitle) finalTitle.textContent = String(finalProject.title || "").trim();
+    const finalFields = document.getElementById("ai-final-project-fields");
+    if (finalFields) {
+      const rows = [
+        ["Description", finalProject.description],
+        ["Objectives", finalProject.objectives],
+        ["Technologies", finalProject.technologies],
+        ["Contribution", finalProject.contribution],
+        ["Challenge", finalProject.challenge],
+        ["Learning and reflection", finalProject.reflection],
+        ["Results", finalProject.results]
+      ].filter(([, value]) => Array.isArray(value)
+        ? value.some((item) => item && String(item).trim())
+        : String(value || "").trim());
+      finalFields.innerHTML = rows.map(([label, value]) => {
+        const content = Array.isArray(value)
+          ? `<ul>${value.filter((item) => item && String(item).trim()).map((item) => `<li>${escapeHTML(item)}</li>`).join("")}</ul>`
+          : escapeHTML(value).replace(/\n/g, "<br>");
+        return `<div><dt>${escapeHTML(label)}</dt><dd>${content}</dd></div>`;
+      }).join("");
+    }
   };
 
   const PDFJS_VERSION = "6.5.438";
@@ -1024,6 +1160,7 @@
       renderWorks();
       renderEmploymentWorks();
       renderActivities();
+      renderAiPortfolio(manifest);
     } catch (error) {
       count.textContent = "CATALOGUE ERROR";
       list.innerHTML = "";

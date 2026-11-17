@@ -7,6 +7,7 @@
   <meta name="description" content="The Artificial Intelligence II exhibition in ARCHIVE / 026, the academic archive of Carl Jhimuel Madanglog.">
   <title>Artificial Intelligence II — ARCHIVE / 026</title>
   <link rel="stylesheet" href="../../styles/archive.css">
+  <link rel="stylesheet" href="../../styles/ai-portfolio.css">
   <script src="../../scripts/works.js" defer></script>
   <script src="../../scripts/archive.js" defer></script>
 </head>
@@ -22,53 +23,101 @@
     </nav>
     <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation"><span></span><span></span></button>
   </header>
+  <nav class="ai-section-nav" aria-label="AI II portfolio sections">
+    <a href="#welcome">01 <span>Welcome</span></a>
+    <a href="#about">02 <span>About me</span></a>
+    <a href="#artifacts">03 <span>Learning artifacts</span></a>
+    <a href="#achievements">04 <span>Achievements &amp; skills</span></a>
+    <a href="#final-project">05 <span>Final project</span></a>
+  </nav>
   <main id="main">
-    <section class="subject-hero" data-mark="AI" aria-labelledby="subject-title">
+    <section class="subject-hero ai-welcome-section" id="welcome" data-mark="AI" aria-labelledby="subject-title">
       <div class="subject-mark ai-mark" aria-hidden="true"><i></i><b></b><em></em><span></span></div>
-      <div class="subject-overline"><span class="subject-code">SUBJECT / 01</span><span>ARTIFICIAL INTELLIGENCE II</span><span>ACADEMIC EXHIBITION</span></div>
-      <h1 class="subject-title" id="subject-title"><span>ARTIFICIAL</span><span class="title-secondary">INTELLIGENCE</span><span>II<span class="period">.</span></span></h1>
+      <div class="subject-overline"><span class="subject-code">SECTION 01</span><span>WELCOME / COURSE INTRODUCTION</span><span>ACADEMIC EXHIBITION</span></div>
+      <h1 class="subject-title" id="subject-title"><span class="ai-title-part">ARTIFICIAL</span><span class="ai-title-part">INTELLIGENCE <span class="title-secondary">II<span class="period">.</span></span></span></h1>
       <div class="subject-deck">
-        <p>Selected coursework in regression, feature selection, natural language processing, and sentiment analysis, alongside a research proposal on Filipino recipe retrieval.</p>
-        <div class="subject-metadata"><span>COLLECTION <strong>01 / 03</strong></span><span>CURATOR <strong>CARL JHIMUEL MADANGLOG</strong></span><span>STATUS <strong>OPEN ARCHIVE</strong></span></div>
+        <p class="ai-welcome-title">Welcome to my Artificial Intelligence II learning portfolio.</p>
+        <p>This portfolio brings together my Artificial Intelligence II coursework, supporting evidence, and learning progress. The artifacts and skills shown here are grounded in the materials collected for the course.</p>
+      </div>
+      <div class="ai-course-path" aria-label="Academic organization: school year, semester, course">
+        <div><span>SCHOOL YEAR</span><strong id="ai-school-year">2026–2027</strong></div>
+        <div><span>SEMESTER</span><strong id="ai-semester">1st Semester (SEM 1)</strong></div>
+        <div><span>COURSE</span><strong id="ai-course-title">Artificial Intelligence II</strong></div>
+      </div>
+      <dl class="ai-course-facts">
+        <div><dt>Student</dt><dd id="ai-student-name">Carl Jhimuel Madanglog</dd></div>
+        <div><dt>Program</dt><dd id="ai-program">Bachelor of Science in Computer Engineering</dd></div>
+        <div><dt>Course code</dt><dd id="ai-course-code">CPE 314-401G</dd></div>
+      </dl>
+    </section>
+
+    <section class="subject-section ai-about-section" id="about" aria-labelledby="ai-about-heading">
+      <div class="subject-section-head">
+        <div class="section-index"><span>02—00</span><span>ABOUT THE STUDENT</span></div>
+        <h2 id="ai-about-heading">About me<span class="period">.</span></h2>
+        <p>Student profile and academic context.</p>
+      </div>
+      <div class="ai-about-layout">
+        <figure class="ai-profile-frame">
+          <img class="ai-profile-photo" src="../../works/artificial-intelligence-ii/covers/Madanglog_ProfPic.jpg" alt="Professional portrait of Carl Jhimuel Madanglog" width="1024" height="1024" loading="lazy" decoding="async">
+          <figcaption>CARL JHIMUEL MADANGLOG / BS COMPUTER ENGINEERING</figcaption>
+        </figure>
+        <div class="ai-about-copy">
+          <h3 id="ai-about-name">Carl Jhimuel Madanglog</h3>
+          <p class="ai-about-program" id="ai-about-program">Bachelor of Science in Computer Engineering</p>
+          <div class="ai-about-field"><h4>Introduction</h4><p id="ai-about-introduction">I am Carl Jhimuel Madanglog, a Bachelor of Science in Computer Engineering student. This page documents my Artificial Intelligence II coursework and learning progress.</p></div>
+          <div class="ai-about-field"><h4>Interests</h4><ul id="ai-about-interests"><li>Multimedia and creative work, video editing, photography, cooking, and driving.</li></ul></div>
+        </div>
       </div>
     </section>
-    <div class="subject-rule"><span class="rule-left">AI—II / INDEX</span><span>WORKS &amp; DOCUMENTS</span><span>026—01</span></div>
 
-    <section class="subject-section" aria-labelledby="works-heading">
+    <section class="subject-section ai-artifacts-section" id="artifacts" aria-labelledby="works-heading">
       <div class="subject-section-head">
-        <div class="section-index"><span>01—01</span><span>CATALOGUE</span></div>
-        <h2 id="works-heading">Collected<br>work<span class="period">.</span></h2>
-        <p>Search the records or choose a category to narrow the collection.</p>
+        <div class="section-index"><span>03—00</span><span>LEARNING EVIDENCE</span></div>
+        <h2 id="works-heading">Learning artifacts<span class="period">.</span></h2>
+        <p>Browse the evidence by category. Expand an artifact to review its description and supporting evidence.</p>
       </div>
       <div class="work-controls">
         <label class="search-wrap" for="work-search"><span aria-hidden="true">⌕</span><span class="sr-only">Search academic works</span><input id="work-search" type="search" placeholder="Search titles, notes, or categories" autocomplete="off"></label>
-        <label class="category-wrap" for="category-filter"><span class="filter-label">FILTER</span><select id="category-filter"><option value="all">All categories</option><option>Activities</option><option>Assignments</option><option>Projects</option><option>Research</option><option>Presentations</option><option>Other</option></select></label>
+        <label class="category-wrap" for="category-filter"><span class="filter-label">FILTER</span><select id="category-filter"><option value="all">All categories</option><option>Laboratory Activities</option><option>Programming Exercises</option><option>Assignments</option><option>Practical Examinations</option><option>Research</option><option>Other</option></select></label>
         <label class="sort-wrap" for="work-sort"><span class="filter-label">SORT</span><select id="work-sort"><option value="title-asc">Title A–Z</option><option value="date-desc">Newest first</option><option value="date-asc">Oldest first</option></select></label>
         <span class="result-count" id="result-count" aria-live="polite">0 RECORDS</span>
       </div>
       <div class="document-list" id="document-list" aria-live="polite"></div>
-      <div class="empty-state" id="empty-state" data-empty="collection">
+      <div class="empty-state" id="empty-state" data-empty="collection" hidden>
         <div class="empty-art" aria-hidden="true">AI</div>
-        <div class="empty-copy"><span class="empty-code">CATALOGUE / 00</span><h3>No files in this collection yet.</h3><p>When academic files are added, they will appear here with searchable details and available reading options.</p><span class="form-hint">SEARCH &amp; CATEGORY FILTERS ARE READY</span></div>
+        <div class="empty-copy"><span class="empty-code"></span><h3></h3><p></p></div>
       </div>
     </section>
 
-    <section class="subject-section final-project-section" aria-labelledby="final-project-heading">
+    <section class="subject-section ai-achievements-section" id="achievements" aria-labelledby="ai-achievements-heading">
       <div class="subject-section-head">
-        <div class="section-index"><span>01—02</span><span>FEATURED SUBMISSION</span></div>
+        <div class="section-index"><span>04—00</span><span>ACHIEVEMENTS &amp; SKILLS</span></div>
+        <h2 id="ai-achievements-heading">Achievements<br>&amp; skills<span class="period">.</span></h2>
+        <p>Documented accomplishments and skills evidenced by coursework, without implying an unverified proficiency level.</p>
+      </div>
+      <div class="ai-achievement-columns">
+        <section aria-labelledby="ai-certificates-heading">
+          <h3 id="ai-certificates-heading">Achievements &amp; certificates</h3>
+          <div id="ai-achievements-list" aria-live="polite"></div>
+        </section>
+        <section aria-labelledby="ai-skills-heading">
+          <h3 id="ai-skills-heading">Skills evidenced by coursework</h3>
+          <div id="ai-skills-list" aria-live="polite"></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="subject-section final-project-section ai-final-project-section" id="final-project" aria-labelledby="final-project-heading">
+      <div class="subject-section-head">
+        <div class="section-index"><span>05—00</span><span>FINAL PROJECT</span></div>
         <h2 id="final-project-heading">Final<br>project<span class="period">.</span></h2>
-        <p>My final project submission for Artificial Intelligence II.</p>
       </div>
-      <a class="final-project-link" href="https://drive.google.com/drive/folders/1d4KUh-MssNyO8llEbsCdc1nxawv3Ww-D?usp=drive_link" target="_blank" rel="noopener noreferrer">VIEW AI 2 FINAL PROJECT <span aria-hidden="true">↗</span></a>
-    </section>
-
-    <section class="subject-section timeline-section" aria-labelledby="timeline-heading">
-      <div class="subject-section-head">
-        <div class="section-index"><span>01—03</span><span>CHRONOLOGY</span></div>
-        <h2 id="timeline-heading">Activity<br>timeline<span class="period">.</span></h2>
-        <p>An index of activities in the collection. Dates appear when supplied.</p>
+      <div class="ai-final-project-content">
+        <h3 class="ai-final-project-title" id="ai-final-title"></h3>
+        <dl class="ai-final-project-fields" id="ai-final-project-fields"></dl>
       </div>
-      <div class="timeline-list" id="timeline-list"><div class="timeline-empty">No activities have been added yet. New dated entries will be listed here.</div></div>
+      <a class="final-project-link" href="https://drive.google.com/drive/folders/1d4KUh-MssNyO8llEbsCdc1nxawv3Ww-D?usp=drive_link" target="_blank" rel="noopener noreferrer">OPEN AI II FINAL PROJECT FOLDER <span aria-hidden="true">↗</span></a>
     </section>
   </main>
   <footer class="subject-end"><a href="../../">← HOME</a><span>ARCHIVE / 026 — AI—II</span><a href="../emerging-technologies/">NEXT EXHIBITION: EMERGING TECHNOLOGIES →</a></footer>

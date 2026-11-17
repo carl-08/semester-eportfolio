@@ -1,10 +1,152 @@
 {
   "subject": "ai",
+  "course": {
+    "title": "Artificial Intelligence II",
+    "studentName": "Carl Jhimuel Madanglog",
+    "program": "Bachelor of Science in Computer Engineering",
+    "courseCode": "CPE 314-401G",
+    "academicYear": "2026–2027",
+    "semester": "1st Semester (SEM 1)"
+  },
+  "aboutMe": {
+    "introduction": "I am Carl Jhimuel Madanglog, a Bachelor of Science in Computer Engineering student. This page documents my Artificial Intelligence II coursework and learning progress.",
+    "interests": [
+      "Multimedia and creative work, video editing, photography, cooking, and driving."
+    ]
+  },
+  "achievements": [
+    {
+      "title": "AWS Academy Graduate - Machine Learning for Natural Language Processing - Training Badge",
+      "type": "Certificate",
+      "issuer": "AWS Academy",
+      "date": "2026-11-17",
+      "description": "The uploaded certificate documents a 20-hour AWS Academy training badge in machine learning for natural language processing.",
+      "evidence": [
+        {
+          "file": "pdfs/Madanglog_NLP_Cert.pdf",
+          "title": "AWS Academy NLP training certificate"
+        },
+        {
+          "url": "https://www.credly.com/go/N8l9ARX3",
+          "title": "Credly badge"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Python programming in coursework",
+      "category": "Programming",
+      "selfAssessment": "Course files document Python implementations for feature selection, regular-expression-based NLP preprocessing, and sentiment analysis. This is evidence of practice, not a proficiency rating.",
+      "evidence": [
+        {
+          "file": "pdfs/lab_1_1_applyingfeatureselectioninlinearregression_madanglog,_carl.py",
+          "title": "Lab 1.1: Feature Selection in Linear Regression"
+        },
+        {
+          "file": "pdfs/madanglog__lab1_basic_nlp_usingregex.py",
+          "title": "Lab 1: Basic NLP with Regular Expressions"
+        },
+        {
+          "file": "pdfs/lab6_sentimentanalysis_madanglog.py",
+          "title": "Lab 6: Sentiment Analysis"
+        }
+      ]
+    },
+    {
+      "name": "Regression modeling and feature selection",
+      "category": "Machine learning",
+      "selfAssessment": "The archived lab, assignment, and practical exam materials document regression workflows and feature-selection exercises.",
+      "evidence": [
+        {
+          "file": "pdfs/lab_1_1_applyingfeatureselectioninlinearregression_madanglog,_carl.py",
+          "title": "Lab 1.1: Feature Selection in Linear Regression"
+        },
+        {
+          "file": "pdfs/PTS2_LRwithFS_Madanglog.ipynb",
+          "title": "PTS2: Linear Regression with Feature Selection"
+        },
+        {
+          "file": "pdfs/AI2_2627_PBE_PrelimExam_MADANGLOG.ipynb",
+          "title": "Prelim PBE: Smart-Home Energy Regression Exam"
+        }
+      ]
+    },
+    {
+      "name": "Natural language processing and text preprocessing",
+      "category": "Artificial intelligence",
+      "selfAssessment": "The archived scripts, notebook, Q&A, and practical exam document regex-based preprocessing, tokenization, text cleaning, stemming, lemmatization, and bag-of-words exercises.",
+      "evidence": [
+        {
+          "file": "pdfs/madanglog__lab1_basic_nlp_usingregex.py",
+          "title": "Lab 1: Basic NLP with Regular Expressions"
+        },
+        {
+          "file": "pdfs/lab-2-1.ipynb",
+          "title": "Lab 2.1: Applying ML to an NLP Problem"
+        },
+        {
+          "file": "pdfs/Lab2_Madanglog.pdf",
+          "title": "Lab 2.1: Applying ML to an NLP Problem — Q&A"
+        },
+        {
+          "file": "pdfs/Midterm_Practical_Exam_2627.ipynb",
+          "title": "Midterm Practical Exam: NLP Processing"
+        }
+      ]
+    },
+    {
+      "name": "Sentiment analysis",
+      "category": "Artificial intelligence",
+      "selfAssessment": "The archived coursework includes sentiment-analysis exercises using NLTK VADER and an Amazon review classification notebook.",
+      "evidence": [
+        {
+          "file": "pdfs/lab6_sentimentanalysis_madanglog.py",
+          "title": "Lab 6: Sentiment Analysis"
+        },
+        {
+          "file": "pdfs/lab-2-1.ipynb",
+          "title": "Lab 2.1: Applying ML to an NLP Problem"
+        }
+      ]
+    },
+    {
+      "name": "AWS SageMaker LinearLearner workflow",
+      "category": "Cloud machine learning",
+      "selfAssessment": "The Lab 2.1 notebook and Q&A document an Amazon SageMaker LinearLearner workflow. This records coursework evidence, not a certificate or proficiency claim.",
+      "evidence": [
+        {
+          "file": "pdfs/lab-2-1.ipynb",
+          "title": "Lab 2.1: Applying ML to an NLP Problem"
+        },
+        {
+          "file": "pdfs/Lab2_Madanglog.pdf",
+          "title": "Lab 2.1: Applying ML to an NLP Problem — Q&A"
+        }
+      ]
+    }
+  ],
+  "finalProject": {
+    "title": "KusinAI – Kusina ni Nanay",
+    "description": "KusinAI is a Filipino recipe chatbot that uses Sentence-BERT and rule-based retrieval to provide relevant Filipino recipes.",
+    "objectives": [
+      "Improve the accessibility of home-cooked Filipino recipes.",
+      "Use retrieval methods to provide relevant recipes through a chatbot."
+    ],
+    "technologies": [
+      "Sentence-BERT",
+      "Rule-based retrieval"
+    ],
+    "contribution": "The recipe collection was sourced from my mother's cookbook.",
+    "challenge": "Dataset cleaning.",
+    "reflection": "Developed a better understanding of chatbot development and information retrieval methods, particularly the importance of preparing and cleaning a reliable dataset.",
+    "results": "Both retrieval methods achieved the same performance score."
+  },
   "works": [
     {
       "id": "prelim-pbe-smart-home-energy-regression",
       "title": "Prelim PBE: Smart-Home Energy Regression Exam",
-      "category": "Assignments",
+      "category": "Practical Examinations",
       "type": "ipynb",
       "description": "Exam notebook for investigating smart-building energy data and building and evaluating regression models.",
       "file": "pdfs/AI2_2627_PBE_PrelimExam_MADANGLOG.ipynb"
@@ -12,7 +154,7 @@
     {
       "id": "lab-1-1-feature-selection-linear-regression",
       "title": "Lab 1.1: Feature Selection in Linear Regression",
-      "category": "Activities",
+      "category": "Laboratory Activities",
       "type": "py",
       "description": "Python lab that explores a housing dataset and applies feature selection in a linear-regression workflow.",
       "file": "pdfs/lab_1_1_applyingfeatureselectioninlinearregression_madanglog,_carl.py"
@@ -20,7 +162,7 @@
     {
       "id": "lab-2-1-ml-nlp-problem",
       "title": "Lab 2.1: Applying ML to an NLP Problem",
-      "category": "Activities",
+      "category": "Laboratory Activities",
       "type": "ipynb",
       "description": "Amazon review sentiment classification exercise using Amazon SageMaker LinearLearner.",
       "file": "pdfs/lab-2-1.ipynb"
@@ -28,7 +170,7 @@
     {
       "id": "lab-2-1-ml-nlp-qa",
       "title": "Lab 2.1: Applying ML to an NLP Problem — Q&A",
-      "category": "Activities",
+      "category": "Laboratory Activities",
       "type": "pdf",
       "description": "Short answers on NLP text preparation, machine-learning pipelines, SageMaker LinearLearner, and alternative classification algorithms.",
       "file": "pdfs/Lab2_Madanglog.pdf"
@@ -36,7 +178,7 @@
     {
       "id": "lab-6-sentiment-analysis",
       "title": "Lab 6: Sentiment Analysis",
-      "category": "Activities",
+      "category": "Programming Exercises",
       "type": "py",
       "description": "Python exercises using NLTK VADER to score sample reviews and compare sentiment-analysis approaches.",
       "file": "pdfs/lab6_sentimentanalysis_madanglog.py"
@@ -44,7 +186,7 @@
     {
       "id": "lab-1-basic-nlp-regular-expressions",
       "title": "Lab 1: Basic NLP with Regular Expressions",
-      "category": "Activities",
+      "category": "Programming Exercises",
       "type": "py",
       "description": "Regex-based NLP practice covering text cleanup, token extraction, URLs, email patterns, stopwords, and preprocessing tasks.",
       "file": "pdfs/madanglog__lab1_basic_nlp_usingregex.py"
@@ -60,7 +202,7 @@
     {
       "id": "midterm-practical-exam-nlp-processing",
       "title": "Midterm Practical Exam: NLP Processing",
-      "category": "Assignments",
+      "category": "Practical Examinations",
       "type": "ipynb",
       "description": "Practical exam tasks for tokenization and cleaning, stemming, lemmatization, part-of-speech tagging, and bag-of-words features.",
       "file": "pdfs/Midterm_Practical_Exam_2627.ipynb"
