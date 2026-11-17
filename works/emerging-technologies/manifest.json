@@ -1,0 +1,80 @@
+{
+  "subject": "emerging",
+  "works": [
+    {
+      "id": "anycompany-well-architecture",
+      "title": "AnyCompany: Well-Architected Case Study",
+      "category": "Cloud Architecture",
+      "type": "pdf",
+      "file": "pdfs/MADANGLOG_AnyCompany_WellArchitecture.pdf",
+      "description": "Applies the AWS Well-Architected Framework to AnyCompany across operational excellence, security, reliability, performance efficiency, and cost optimization."
+    },
+    {
+      "id": "baluyot-ptf1-drawio",
+      "title": "Baluyot PTF1: VPC Network Diagram",
+      "category": "Cloud Architecture",
+      "type": "pdf",
+      "file": "pdfs/MADANGLOG_BALUYOT_PTF1.drawio.pdf",
+      "description": "A VPC diagram with public and private subnets across two availability zones."
+    },
+    {
+      "id": "case-study-2-emerging",
+      "title": "Case Study 2: Scalable Storage Architecture",
+      "category": "AWS Core Services",
+      "type": "pdf",
+      "file": "pdfs/Madanglog_CaseStudy2_Emerging.pdf",
+      "description": "Compares Amazon S3, S3 Glacier, EFS, and EBS for petabyte-scale email storage and recommends S3 for primary object storage."
+    },
+    {
+      "id": "prelim-lab-activity-1",
+      "title": "Prelim Lab Activity 1: IAM Permissions",
+      "category": "AWS Security",
+      "type": "pdf",
+      "file": "pdfs/MADANGLOG_PrelimLabAct1.pdf",
+      "description": "Reviews S3 and EC2 user permissions and how policies affect users, groups, and resources."
+    },
+    {
+      "id": "prelim-project",
+      "title": "Prelim Project: Cloud Deployment Proposal",
+      "category": "Projects and Practical Applications",
+      "type": "pdf",
+      "file": "pdfs/MADANGLOG_PrelimProj.pdf",
+      "description": "A cloud deployment proposal for Amazing Pharma Corp, covering infrastructure needs, an AWS plan, and pricing estimates."
+    },
+    {
+      "id": "pt-3-2-dockers-containers",
+      "title": "PT 3.2: Dockers and Containers",
+      "category": "AWS Core Services",
+      "type": "pdf",
+      "file": "pdfs/PT3.2_Dockers&Containers_Madanglog.pdf",
+      "description": "Covers EC2 and RDS choices, container concepts, and an AWS deployment flow using ECR, ECS, and Fargate."
+    },
+    {
+      "id": "ptf2-aws-pricing-calculator",
+      "title": "PTF2: AWS Pricing Calculator Estimate",
+      "category": "Pricing and Billing",
+      "type": "pdf",
+      "file": "pdfs/PTF2_AWSPricingCal_Madanglog.pdf",
+      "description": "An AWS Pricing Calculator export showing upfront, monthly, and 12-month costs for EC2 configurations."
+    },
+    {
+      "id": "ptf2-pricing-calculator",
+      "title": "PTF2: Pricing Calculator Analysis",
+      "category": "Pricing and Billing",
+      "type": "pdf",
+      "file": "pdfs/PTF2_PricingCalculator_Madanglog.pdf",
+      "date": "2026-07-21",
+      "description": "Compares AWS pricing estimates and regional configurations, including partial-upfront and all-upfront payment options."
+    },
+    {
+      "id": "pts1-group-9",
+      "title": "PTS1 Group 9: AWS TCO Case Analysis",
+      "category": "Pricing and Billing",
+      "type": "pdf",
+      "file": "pdfs/PTS1_Group9_Madanglog, Mallari, Agrava.pdf",
+      "date": "2026-07-24",
+      "description": "A group AWS total-cost-of-ownership case analysis covering cloud architecture, projected costs, and support options."
+    }
+  ],
+  "activities": []
+}

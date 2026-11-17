@@ -1,0 +1,145 @@
+{
+  "subject": "seminars",
+  "works": [
+    {
+      "id": "madanglog-customer-cen-cert",
+      "title": "Customer Centricity (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_CustomerCen_Cert.pdf"
+    },
+    {
+      "id": "madanglog-effective-speak-cert",
+      "title": "Effective Speaking and Listening Skills (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_EffectiveSpeak_Cert.pdf"
+    },
+    {
+      "id": "madanglog-impactful-writing-cert",
+      "title": "Impactful Writing Skills (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_ImpactfulWriting_Cert.pdf"
+    },
+    {
+      "id": "madanglog-interpersonal-cert",
+      "title": "Interpersonal Skills (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_Interpersonal_Cert.pdf"
+    },
+    {
+      "id": "madanglog-intro2-ai-cert",
+      "title": "Introduction to Artificial Intelligence (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_Intro2AI_Cert.pdf"
+    },
+    {
+      "id": "madanglog-online-com-cert",
+      "title": "Online Communication & Data Security (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_OnlineCom_Cert.pdf"
+    },
+    {
+      "id": "madanglog-problem-solving-cert",
+      "title": "Problem Solving & Innovation (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_ProblemSolving_Cert.pdf"
+    },
+    {
+      "id": "madanglog-prof-cert",
+      "title": "Professionalism (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_Prof_Cert.pdf"
+    },
+    {
+      "id": "madanglog-self-management-cert",
+      "title": "Self Management (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_SelfManagement_Cert.pdf"
+    },
+    {
+      "id": "madanglog-self-presentation-cert",
+      "title": "Self-Presentation (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_SelfPresentation_Cert.pdf"
+    },
+    {
+      "id": "madanglog-work-prod-cert",
+      "title": "Work Productivity Tools (US English)",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Madanglog_WorkProd_Cert.pdf"
+    },
+    {
+      "id": "wadhwani-foundation-certificate-6af740a2b95747192f28d91f",
+      "title": "Employability Skills: JobReady (With AI) v1",
+      "category": "Certificates",
+      "type": "pdf",
+      "date": "2026-11-14",
+      "file": "documents/Wadhwani Foundation Certificate - 6af740a2b95747192f28d91f.pdf"
+    },
+    {
+      "id": "fieldtrips-bus",
+      "title": "Field Trip: Bus Interior",
+      "category": "Field Trips",
+      "type": "jpg",
+      "file": "photos/FIELDTRIPS_BUS.jpg"
+    },
+    {
+      "id": "fieldtrips-hitech",
+      "title": "Field Trip: Hi-Tech Equipment",
+      "category": "Field Trips",
+      "type": "jpg",
+      "file": "photos/FIELDTRIPS_HITECH.jpg"
+    },
+    {
+      "id": "fieldtrips-hitech-1",
+      "title": "Field Trip: Hi-Tech Workshop",
+      "category": "Field Trips",
+      "type": "jpg",
+      "file": "photos/FIELDTRIPS_HITECH_1.jpg"
+    },
+    {
+      "id": "fieldtrips-schneiderelectric",
+      "title": "Field Trip: Schneider Electric Group Photo",
+      "category": "Field Trips",
+      "type": "jpg",
+      "file": "photos/FIELDTRIPS_SCHNEIDERELECTRIC.jpg"
+    },
+    {
+      "id": "fieldtrips-schneiderelectric-1",
+      "title": "Field Trip: Schneider Electric Building",
+      "category": "Field Trips",
+      "type": "jpg",
+      "file": "photos/FIELDTRIPS_SCHNEIDERELECTRIC_1.jpg"
+    },
+    {
+      "id": "guard-your-byte-1",
+      "title": "Guard Your Byte 1",
+      "category": "Seminars",
+      "type": "png",
+      "file": "photos/SEMINARS_Guard your byte_1.png"
+    }
+  ],
+  "activities": [],
+  "employmentWorks": []
+}
