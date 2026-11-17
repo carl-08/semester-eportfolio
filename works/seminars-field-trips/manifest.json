@@ -141,5 +141,20 @@
     }
   ],
   "activities": [],
-  "employmentWorks": []
+  "employmentWorks": [
+    {
+      "id": "company-id",
+      "title": "Company ID",
+      "category": "Employment Verification",
+      "type": "jpg",
+      "file": "employment-supporting-documents/Madanglog_CompanyID.jpg"
+    },
+    {
+      "id": "payslip",
+      "title": "Payslip",
+      "category": "Other Supporting Evidence",
+      "type": "png",
+      "file": "employment-supporting-documents/Madanglog_payslip.png"
+    }
+  ]
 }
