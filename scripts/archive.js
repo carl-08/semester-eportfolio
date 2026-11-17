@@ -79,7 +79,7 @@
     document.addEventListener("click", (event) => {
       const link = event.target.closest("a[href]");
       if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      if (link.target || link.hasAttribute("download")) return;
+      if (link.target) return;
       const destination = new URL(link.href, window.location.href);
       if (destination.origin !== window.location.origin || destination.pathname === window.location.pathname || destination.hash) return;
       event.preventDefault();
@@ -172,7 +172,6 @@
   const viewerError = document.getElementById("pdf-viewer-error");
   const errorMessage = document.getElementById("pdf-error-message");
   const fallbackLink = document.getElementById("pdf-fallback-link");
-  const downloadLink = document.getElementById("pdf-download");
   const imagePreview = document.getElementById("pdf-image-preview");
   const sourcePreview = document.getElementById("source-preview");
   const toolbar = dialog.querySelector(".pdf-toolbar");
@@ -259,28 +258,21 @@
     const title = escapeHTML(work.title || "Untitled record");
     const category = escapeHTML(work.category);
     const format = escapeHTML(work.type ? work.type.toUpperCase() : "LINK");
-    const filename = work.file?.split("/").pop() || work.title || "download";
+    const filename = work.file?.split("/").pop() || work.title || "file";
     const date = options.showDate === false || !work.date ? "" : `<time datetime="${escapeHTML(work.date)}">${escapeHTML(work.date)}</time>`;
     const filenameFact = options.showFilename && work.file ? `<span class="document-filename">FILE ${escapeHTML(filename)}</span>` : "";
     const tag = escapeHTML(options.tag || (subjectKey === "ai" ? "AI—II" : subjectKey === "emerging" ? "ET—026" : "SFT—026"));
     let openAction = "";
-    let downloadAction = "";
     if (work.fileUrl && work.type === "pdf") {
       openAction = `<button class="document-open" type="button" data-preview-url="${escapeHTML(work.fileUrl)}" data-preview-kind="pdf" data-preview-title="${title}" data-preview-name="${escapeHTML(filename)}">Open Document <span aria-hidden="true">↗</span></button>`;
-      downloadAction = `<a class="document-download" href="${escapeHTML(work.fileUrl)}" download="${escapeHTML(filename)}">Download <span aria-hidden="true">↓</span></a>`;
     } else if (work.fileUrl && subjectKey === "seminars" && ["png", "jpg", "jpeg"].includes(work.type)) {
       openAction = `<button class="document-open" type="button" data-preview-url="${escapeHTML(work.fileUrl)}" data-preview-kind="image" data-preview-title="${title}" data-preview-name="${escapeHTML(filename)}">Open Image <span aria-hidden="true">↗</span></button>`;
-      downloadAction = `<a class="document-download" href="${escapeHTML(work.fileUrl)}" download="${escapeHTML(filename)}">Download <span aria-hidden="true">↓</span></a>`;
     } else if (work.fileUrl && subjectKey === "ai" && ["py", "ipynb"].includes(work.type)) {
       const previewKind = work.type === "py" ? "code" : "notebook";
       const previewLabel = work.type === "py" ? "Open Code" : "Open Notebook";
-      downloadAction = `<a class="document-download" href="${escapeHTML(work.fileUrl)}" download="${escapeHTML(filename)}">Download <span aria-hidden="true">↓</span></a>`;
       openAction = `<button class="document-open" type="button" data-preview-url="${escapeHTML(work.fileUrl)}" data-preview-kind="${previewKind}" data-preview-title="${title}" data-preview-name="${escapeHTML(filename)}">${previewLabel} <span aria-hidden="true">↗</span></button>`;
-    } else if (work.fileUrl && subjectKey === "seminars") {
-      downloadAction = `<a class="document-download" href="${escapeHTML(work.fileUrl)}" download="${escapeHTML(filename)}">Download <span aria-hidden="true">↓</span></a>`;
     } else if (work.fileUrl) {
       openAction = `<a class="document-open" href="${escapeHTML(work.fileUrl)}" target="_blank" rel="noopener noreferrer">Open Document <span aria-hidden="true">↗</span></a>`;
-      downloadAction = `<a class="document-download" href="${escapeHTML(work.fileUrl)}" download="${escapeHTML(filename)}">Download <span aria-hidden="true">↓</span></a>`;
     } else if (work.externalUrl) {
       openAction = `<a class="document-open" href="${escapeHTML(work.externalUrl)}" target="_blank" rel="noopener noreferrer">Open Document <span aria-hidden="true">↗</span></a>`;
     }
@@ -291,7 +283,7 @@
       <span class="document-file-icon ${iconKind}" aria-hidden="true"><span>${iconLabel}</span></span>
       <div class="document-main"><h3>${title}</h3><div class="document-facts"><span class="document-category">${category}</span><span class="document-type">${format}</span>${date}${filenameFact}</div></div>
       <span class="document-code" aria-hidden="true">${tag}</span>
-      <div class="document-actions">${openAction}${downloadAction}</div>
+      <div class="document-actions">${openAction}</div>
     </article>`;
   };
 
@@ -722,7 +714,6 @@
     viewerStatus.textContent = "Choose a document to open it here.";
     viewerError.hidden = true;
     toolbar.hidden = false;
-    downloadLink.hidden = true;
     pageCount.textContent = "— / —";
     zoomLevel.textContent = "100%";
     previousButton.disabled = true;
@@ -764,9 +755,6 @@
     const token = viewerToken;
     const previewTitles = { pdf: "PDF READER", image: "IMAGE PREVIEW", code: "PYTHON SOURCE", notebook: "JUPYTER NOTEBOOK" };
     titleNode.textContent = `${title} / ${previewTitles[kind] || "FILE PREVIEW"}`;
-    downloadLink.href = url;
-    downloadLink.download = filename || title;
-    downloadLink.hidden = false;
     fallbackLink.href = url;
     fallbackLink.textContent = kind === "pdf" ? "Open original PDF" : "Open original file";
     showDialog();
@@ -775,7 +763,7 @@
       toolbar.hidden = true;
       imagePreview.alt = title;
       imagePreview.onload = () => { if (token === viewerToken) viewerStatus.hidden = true; };
-      imagePreview.onerror = () => { if (token === viewerToken) showViewerError("This image could not be opened. Use the link below to access the original file."); };
+      imagePreview.onerror = () => { if (token === viewerToken) showViewerError("This image could not be opened in the preview."); };
       imagePreview.src = url;
       imagePreview.hidden = false;
       viewerStatus.textContent = "Loading image preview…";
@@ -785,7 +773,7 @@
     if (kind === "code" || kind === "notebook") {
       toolbar.hidden = true;
       if (!sourcePreview) {
-        showViewerError("This source preview is unavailable. Use the link below to open or download the original file.");
+        showViewerError("This source preview is unavailable.");
         return;
       }
       viewerStatus.textContent = kind === "code" ? "Loading Python source…" : "Loading notebook cells…";
@@ -828,7 +816,7 @@
         sourcePreview.hidden = false;
       } catch (error) {
         if (token !== viewerToken) return;
-        showViewerError("This source file could not be previewed. Open or download the original file instead.");
+        showViewerError("This source file could not be previewed.");
       }
       return;
     }
@@ -860,7 +848,7 @@
       updateToolbar();
     } catch (error) {
       if (token !== viewerToken) return;
-      showViewerError("This PDF is missing, unreadable, or PDF.js could not load. Open or download the original file instead.");
+      showViewerError("This PDF is missing, unreadable, or PDF.js could not load.");
     }
   };
 

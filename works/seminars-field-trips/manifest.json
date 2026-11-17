@@ -138,6 +138,20 @@
       "category": "Seminars",
       "type": "png",
       "file": "photos/SEMINARS_Guard your byte_1.png"
+    },
+    {
+      "id": "guard-your-byte-2",
+      "title": "Guard Your Byte 2",
+      "category": "Seminars",
+      "type": "png",
+      "file": "photos/SEMINARS_Guard Your Byte_2.png"
+    },
+    {
+      "id": "guard-your-byte-3",
+      "title": "Guard Your Byte 3",
+      "category": "Seminars",
+      "type": "png",
+      "file": "photos/SEMINARS_Guard Your Byte_3.png"
     }
   ],
   "activities": [],

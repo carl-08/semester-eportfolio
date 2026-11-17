@@ -305,8 +305,6 @@ body.pointer-over-link .cursor-orb::before { width: 23px; height: 23px; backgrou
 .pdf-viewer-shell { height: 100%; display: grid; grid-template-rows: 56px auto minmax(0, 1fr); background: var(--bg); }
 .pdf-dialog-head { min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 12px 0 20px; border-bottom: 1px solid var(--line); background: var(--panel); }
 .pdf-dialog-title { flex: 1; min-width: 0; margin: 0; overflow: hidden; color: var(--paper); font: 10px var(--mono); letter-spacing: .08em; text-overflow: ellipsis; white-space: nowrap; }
-.pdf-download { min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; color: var(--gold-highlight); font: 8px var(--mono); letter-spacing: .07em; white-space: nowrap; }
-.pdf-download:hover { color: var(--gold); }
 .pdf-dialog-close { flex: none; min-width: 44px; min-height: 44px; border: 1px solid var(--line); background: transparent; color: var(--paper); cursor: pointer; font-size: 19px; }
 .pdf-dialog-close:hover { border-color: var(--gold); color: var(--gold-highlight); }
 .pdf-toolbar { display: grid; grid-template-columns: auto minmax(240px,1fr) auto; align-items: center; gap: 8px 12px; padding: 7px 12px; border-bottom: 1px solid var(--line); background: var(--surface); }
@@ -443,7 +441,6 @@ body.is-entering main { animation: page-in .45s both; }
   .pdf-dialog { width: calc(100vw - 16px); height: calc(100svh - 16px); }
   .pdf-dialog-head { gap: 6px; padding-left: 10px; }
   .pdf-dialog-title { font-size: 8px; }
-  .pdf-download { padding: 0 5px; font-size: 7px; }
   .pdf-toolbar { grid-template-columns: 1fr; justify-items: stretch; gap: 5px; padding: 5px; }
   .pdf-page-controls, .pdf-zoom-controls { grid-column: 1; grid-row: auto; justify-content: center; }
   .pdf-search-group { grid-column: 1; grid-row: auto; width: 100%; justify-content: center; }
