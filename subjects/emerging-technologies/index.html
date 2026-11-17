@@ -7,6 +7,7 @@
   <meta name="description" content="The Emerging Technologies exhibition in ARCHIVE / 026, the academic archive of Carl Jhimuel Madanglog.">
   <title>Emerging Technologies — ARCHIVE / 026</title>
   <link rel="stylesheet" href="../../styles/archive.css">
+  <link rel="stylesheet" href="../../styles/et-portfolio.css">
   <script src="../../scripts/works.js" defer></script>
   <script src="../../scripts/archive.js" defer></script>
 </head>
@@ -22,27 +23,59 @@
     </nav>
     <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation"><span></span><span></span></button>
   </header>
+  <nav class="et-section-nav" aria-label="Emerging Technologies portfolio sections">
+    <a href="#welcome">01 <span>Welcome</span></a>
+    <a href="#about">02 <span>About me</span></a>
+    <a href="#artifacts">03 <span>Learning artifacts</span></a>
+    <a href="#achievements">04 <span>Achievements &amp; skills</span></a>
+    <a href="#final-project">05 <span>Final project</span></a>
+  </nav>
   <main id="main">
-    <section class="subject-hero" data-mark="ET" aria-labelledby="subject-title">
+    <section class="subject-hero et-welcome-section" id="welcome" data-mark="ET" aria-labelledby="subject-title">
       <div class="subject-mark et-mark" aria-hidden="true"><span></span></div>
-      <div class="subject-overline"><span class="subject-code">SUBJECT / 02</span><span>EMERGING TECHNOLOGIES</span><span>ACADEMIC EXHIBITION</span></div>
+      <div class="subject-overline"><span class="subject-code">SECTION 01</span><span>WELCOME / COURSE INTRODUCTION</span><span>ACADEMIC EXHIBITION</span></div>
       <h1 class="subject-title" id="subject-title"><span>EMERGING</span><span class="title-secondary">TECHNOLOGIES<span class="period">.</span></span></h1>
-      <div class="subject-deck">
-        <p>Coursework and supporting documents in Emerging Technologies.</p>
-        <div class="subject-metadata"><span>COLLECTION <strong>02 / 03</strong></span><span>CURATOR <strong>CARL JHIMUEL MADANGLOG</strong></span><span>STATUS <strong>OPEN ARCHIVE</strong></span></div>
+      <div class="subject-deck et-welcome-deck">
+        <p class="et-welcome-title">Welcome to my Emerging Technologies learning portfolio.</p>
+        <p>This portfolio brings together coursework and project evidence in AWS cloud computing, architecture, security, and cost analysis.</p>
+      </div>
+      <dl class="et-course-facts">
+        <div><dt>Course</dt><dd id="et-course-title">Emerging Technologies</dd></div>
+        <div><dt>Course code</dt><dd id="et-course-code">CPE C405-401G</dd></div>
+        <div><dt>Student</dt><dd id="et-student-name">Carl Jhimuel Madanglog</dd></div>
+        <div><dt>Program</dt><dd id="et-program">Bachelor of Science in Computer Engineering</dd></div>
+      </dl>
+    </section>
+
+    <section class="subject-section et-about-section" id="about" aria-labelledby="et-about-heading">
+      <div class="subject-section-head">
+        <div class="section-index"><span>02—00</span><span>ABOUT THE STUDENT</span></div>
+        <h2 id="et-about-heading">About me<span class="period">.</span></h2>
+        <p>Student profile and academic context.</p>
+      </div>
+      <div class="et-about-layout">
+        <figure class="et-profile-frame">
+          <img class="et-profile-photo" src="../../works/artificial-intelligence-ii/covers/Madanglog_ProfPic.jpg" alt="Professional portrait of Carl Jhimuel Madanglog" width="1024" height="1024" loading="lazy" decoding="async">
+          <figcaption>CARL JHIMUEL MADANGLOG / BS COMPUTER ENGINEERING</figcaption>
+        </figure>
+        <div class="et-about-copy">
+          <h3 id="et-about-name">Carl Jhimuel Madanglog</h3>
+          <p class="et-about-program" id="et-about-program">Bachelor of Science in Computer Engineering</p>
+          <div class="et-about-field"><h4>Introduction</h4><p id="et-about-introduction"></p></div>
+          <div class="et-about-field"><h4>Interests</h4><ul id="et-about-interests"></ul></div>
+        </div>
       </div>
     </section>
-    <div class="subject-rule"><span class="rule-left">ET—026 / INDEX</span><span>WORKS &amp; DOCUMENTS</span><span>026—02</span></div>
 
-    <section class="subject-section" aria-labelledby="works-heading">
+    <section class="subject-section et-artifacts-section" id="artifacts" aria-labelledby="works-heading">
       <div class="subject-section-head">
-        <div class="section-index"><span>02—01</span><span>CATALOGUE</span></div>
-        <h2 id="works-heading">Collected<br>work<span class="period">.</span></h2>
-        <p>Search the records or choose a category to narrow the collection.</p>
+        <div class="section-index"><span>03—00</span><span>LEARNING EVIDENCE</span></div>
+        <h2 id="works-heading">Learning artifacts<span class="period">.</span></h2>
+        <p>Search the nine coursework records by topic. Expand an artifact to review its description and evidence.</p>
       </div>
       <div class="work-controls">
         <label class="search-wrap" for="work-search"><span aria-hidden="true">⌕</span><span class="sr-only">Search academic works</span><input id="work-search" type="search" placeholder="Search titles, notes, or categories" autocomplete="off"></label>
-        <label class="category-wrap" for="category-filter"><span class="filter-label">FILTER</span><select id="category-filter"><option value="all">All categories</option><option>AWS Cloud Fundamentals</option><option>AWS Core Services</option><option>AWS Security</option><option>Cloud Architecture</option><option>AWS Academy Laboratories</option><option>Pricing and Billing</option><option>Certification Review</option><option>Projects and Practical Applications</option></select></label>
+        <label class="category-wrap" for="category-filter"><span class="filter-label">FILTER</span><select id="category-filter"><option value="all">All categories</option><option>Cloud Architecture</option><option>AWS Core Services</option><option>AWS Security</option><option>Projects and Practical Applications</option><option>Pricing and Billing</option></select></label>
         <label class="sort-wrap" for="work-sort"><span class="filter-label">SORT</span><select id="work-sort"><option value="title-asc">Title A–Z</option><option value="date-desc">Newest first</option><option value="date-asc">Oldest first</option></select></label>
         <span class="result-count" id="result-count" aria-live="polite">0 RECORDS</span>
       </div>
@@ -53,21 +86,33 @@
       </div>
     </section>
 
-    <section class="subject-section final-project-section" aria-labelledby="final-project-heading">
+    <section class="subject-section et-skills-section" id="achievements" aria-labelledby="et-skills-heading">
       <div class="subject-section-head">
-        <div class="section-index"><span>02—02</span><span>FINAL PROJECT</span></div>
-        <h2 id="final-project-heading">Final<br>project<span class="period">.</span></h2>
+        <div class="section-index"><span>04—00</span><span>ACHIEVEMENTS &amp; SKILLS</span></div>
+        <h2 id="et-skills-heading">Achievements<br>&amp; skills<span class="period">.</span></h2>
+        <p>Skills documented by Emerging Technologies coursework.</p>
       </div>
-      <a class="final-project-link" href="https://drive.google.com/drive/folders/1cckEsK4phh27c1tspBwfr6H_LkndOJMW?usp=sharing" target="_blank" rel="noopener noreferrer">View Final Project <span aria-hidden="true">↗</span></a>
+      <section class="et-skills-list-section" aria-labelledby="et-skills-list-heading">
+        <h3 id="et-skills-list-heading">Skills evidenced by coursework</h3>
+        <div id="et-skills-list" aria-live="polite"></div>
+      </section>
     </section>
 
-    <section class="subject-section timeline-section" aria-labelledby="timeline-heading" hidden>
+    <section class="subject-section final-project-section et-final-project-section" id="final-project" aria-labelledby="final-project-heading">
       <div class="subject-section-head">
-        <div class="section-index"><span>02—03</span><span>CHRONOLOGY</span></div>
-        <h2 id="timeline-heading">Activity<br>timeline<span class="period">.</span></h2>
-        <p>A dated index of activities entered into this subject archive.</p>
+        <div class="section-index"><span>05—00</span><span>FINAL PROJECT</span></div>
+        <h2 id="final-project-heading">Final<br>project<span class="period">.</span></h2>
       </div>
-      <div class="timeline-list" id="timeline-list"></div>
+      <div class="et-final-project-content">
+        <h3 class="et-final-project-title" id="et-final-title"></h3>
+        <p class="et-final-project-subtitle" id="et-final-subtitle" hidden></p>
+        <dl class="et-final-fields" id="et-final-fields"></dl>
+        <div class="et-final-evidence" id="et-final-evidence"></div>
+        <div class="et-final-actions">
+          <a class="final-project-link" href="https://drive.google.com/drive/folders/1cckEsK4phh27c1tspBwfr6H_LkndOJMW?usp=sharing" target="_blank" rel="noopener noreferrer">OPEN FINAL PROJECT FOLDER <span aria-hidden="true">↗</span></a>
+          <a class="final-project-link et-demo-link" id="et-demo-link" href="https://drive.google.com/file/d/1jQsbYRn8M5X8GElMtm8r6l8lGM9BfECp/view?usp=sharing" target="_blank" rel="noopener noreferrer">WATCH PROJECT DEMO <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
     </section>
   </main>
   <footer class="subject-end"><a href="../../">← HOME</a><span>ARCHIVE / 026 — ET—026</span><a href="../seminars-field-trips/">NEXT EXHIBITION: SEMINARS &amp; FIELD TRIPS →</a></footer>

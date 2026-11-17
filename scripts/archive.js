@@ -124,8 +124,8 @@
   const categoriesBySubject = {
     ai: ["Laboratory Activities", "Programming Exercises", "Assignments", "Practical Examinations", "Research", "Other"],
     emerging: [
-      "AWS Cloud Fundamentals", "AWS Core Services", "AWS Security", "Cloud Architecture",
-      "AWS Academy Laboratories", "Pricing and Billing", "Certification Review", "Projects and Practical Applications"
+      "Cloud Architecture", "AWS Core Services", "AWS Security",
+      "Projects and Practical Applications", "Pricing and Billing"
     ],
     seminars: []
   };
@@ -261,6 +261,21 @@
     </details>`;
   };
 
+  const renderEmergingArtifactDetails = (work, filename) => {
+    const fields = [];
+    if (String(work.description || "").trim()) fields.push(["Description", work.description]);
+    if (work.fileUrl) {
+      fields.push(["Supporting evidence", `<a href="${escapeHTML(work.fileUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(filename)}</a>`, true]);
+    }
+    if (!fields.length) return "";
+    return `<details class="et-artifact-details">
+      <summary>Artifact details</summary>
+      <dl class="et-field-list">
+        ${fields.map(([label, value, isHtml]) => `<div><dt>${escapeHTML(label)}</dt><dd>${isHtml ? value : escapeHTML(value).replace(/\n/g, "<br>")}</dd></div>`).join("")}
+      </dl>
+    </details>`;
+  };
+
   const makeDocumentRow = (work, options = {}) => {
     const title = escapeHTML(work.title || "");
     const category = escapeHTML(work.category);
@@ -285,11 +300,14 @@
     } else if (work.externalUrl) {
       openAction = `<a class="document-open" href="${escapeHTML(work.externalUrl)}" target="_blank" rel="noopener noreferrer">Open Document <span aria-hidden="true">↗</span></a>`;
     }
-    const artifactDetails = subjectKey === "ai" ? renderAiArtifactDetails(work, filename) : "";
+    const artifactDetails = subjectKey === "ai"
+      ? renderAiArtifactDetails(work, filename)
+      : subjectKey === "emerging" ? renderEmergingArtifactDetails(work, filename) : "";
     const isImage = ["png", "jpg", "jpeg"].includes(work.type);
     const iconKind = work.type === "pdf" ? "is-pdf" : work.type === "py" ? "is-code" : work.type === "ipynb" ? "is-notebook" : isImage ? "is-image" : "";
     const iconLabel = work.type === "pdf" ? "PDF" : work.type === "py" ? "PY" : work.type === "ipynb" ? "NB" : isImage ? "IMG" : format.slice(0, 3);
-    return `<article class="document-row${subjectKey === "ai" ? " ai-document-row" : ""}">
+    const subjectRowClass = subjectKey === "ai" ? " ai-document-row" : subjectKey === "emerging" ? " et-document-row" : "";
+    return `<article class="document-row${subjectRowClass}">
       <span class="document-file-icon ${iconKind}" aria-hidden="true"><span>${iconLabel}</span></span>
       <div class="document-main"><h3>${title}</h3><div class="document-facts"><span class="document-category">${category}</span><span class="document-type">${format}</span>${date}${filenameFact}</div></div>
       <span class="document-code" aria-hidden="true">${tag}</span>
@@ -535,6 +553,133 @@
           : escapeHTML(value).replace(/\n/g, "<br>");
         return `<div><dt>${escapeHTML(label)}</dt><dd>${content}</dd></div>`;
       }).join("");
+    }
+  };
+
+  const renderEmergingPortfolio = (manifest) => {
+    if (subjectKey !== "emerging") return;
+    const course = manifest.course && typeof manifest.course === "object" ? manifest.course : {};
+    const aboutMe = manifest.aboutMe && typeof manifest.aboutMe === "object" ? manifest.aboutMe : {};
+    const finalProject = manifest.finalProject && typeof manifest.finalProject === "object" ? manifest.finalProject : {};
+    const setText = (id, value) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      const text = String(value || "").trim();
+      if (!text) {
+        (element.closest(".et-about-field, .et-course-facts div") || element).remove();
+        return;
+      }
+      element.textContent = text;
+    };
+    const setList = (id, values) => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      const items = Array.isArray(values) ? values.filter((value) => value && String(value).trim()) : [];
+      if (!items.length) {
+        element.closest(".et-about-field")?.remove();
+        return;
+      }
+      element.innerHTML = items.map((value) => `<li>${escapeHTML(value)}</li>`).join("");
+    };
+    const evidenceList = (items) => {
+      const records = Array.isArray(items) ? items : [];
+      return records.map((item) => {
+        if (!item || typeof item !== "object") return "";
+        const href = item.file ? resolveManifestFile(item.file) : safeExternalUrl(item.url);
+        if (!href) return "";
+        const label = item.title || item.file?.split("/").pop() || href;
+        return `<li><a href="${escapeHTML(href)}" target="_blank" rel="noopener noreferrer">${escapeHTML(label)}</a></li>`;
+      }).filter(Boolean).join("");
+    };
+    const renderFieldRows = (fields) => {
+      const rows = fields.filter(([, value]) => Array.isArray(value)
+        ? value.some((item) => item && String(item).trim())
+        : String(value || "").trim());
+      return rows.map(([label, value]) => {
+        const content = Array.isArray(value)
+          ? `<ul>${value.filter((item) => item && String(item).trim()).map((item) => `<li>${escapeHTML(item)}</li>`).join("")}</ul>`
+          : escapeHTML(value).replace(/\n/g, "<br>");
+        return `<div><dt>${escapeHTML(label)}</dt><dd>${content}</dd></div>`;
+      }).join("");
+    };
+    const recordFields = (fields) => {
+      const rows = renderFieldRows(fields);
+      return rows ? `<dl class="et-record-fields">${rows}</dl>` : "";
+    };
+
+    setText("et-course-title", course.title);
+    setText("et-course-code", course.courseCode);
+    setText("et-student-name", course.studentName);
+    setText("et-program", course.program);
+    setText("et-about-name", course.studentName);
+    setText("et-about-program", course.program);
+    setText("et-about-introduction", aboutMe.introduction);
+    setList("et-about-interests", aboutMe.interests);
+
+    const skillsList = document.getElementById("et-skills-list");
+    const skills = Array.isArray(manifest.skills) ? manifest.skills : [];
+    if (skillsList) {
+      const records = skills.map((entry) => {
+        const title = String(entry?.name || "").trim();
+        if (!title) return "";
+        const fields = [
+          ["Skill area", entry.category],
+          ["Evidence summary", entry.description]
+        ];
+        const evidence = evidenceList(entry.evidence);
+        const evidenceFields = evidence
+          ? `<dl class="et-record-fields"><div><dt>Supporting evidence</dt><dd><ul>${evidence}</ul></dd></div></dl>`
+          : "";
+        return `<article class="et-record"><h4>${escapeHTML(title)}</h4>${recordFields(fields)}${evidenceFields}</article>`;
+      }).filter(Boolean);
+      skillsList.innerHTML = records.length ? `<div class="et-entry-list">${records.join("")}</div>` : "";
+      const section = skillsList.closest(".et-skills-list-section");
+      if (section) section.hidden = !records.length;
+    }
+
+    const finalSection = document.getElementById("final-project");
+    const finalTitle = document.getElementById("et-final-title");
+    const title = String(finalProject.title || "").trim();
+    if (finalTitle) finalTitle.textContent = title;
+    if (finalSection) finalSection.hidden = !title;
+    const subtitle = document.getElementById("et-final-subtitle");
+    if (subtitle) {
+      const text = String(finalProject.subtitle || "").trim();
+      subtitle.textContent = text;
+      subtitle.hidden = !text;
+    }
+    const finalFields = document.getElementById("et-final-fields");
+    if (finalFields) {
+      const rows = [
+        ["Description", finalProject.description],
+        ["Objectives", finalProject.objectives],
+        ["Technologies", finalProject.technologies],
+        ["Personal contribution", finalProject.contribution],
+        ["Challenge", finalProject.challenge],
+        ["Learning and reflection", finalProject.reflection],
+        ["Results", finalProject.results],
+        ["Cost estimate", finalProject.costEstimate]
+      ];
+      finalFields.innerHTML = renderFieldRows(rows);
+    }
+
+    const finalEvidence = document.getElementById("et-final-evidence");
+    if (finalEvidence) {
+      const evidence = evidenceList(finalProject.evidence);
+      finalEvidence.innerHTML = evidence ? `<span>Supporting evidence</span><ul>${evidence}</ul>` : "";
+      finalEvidence.hidden = !evidence;
+    }
+    const folderLink = document.querySelector(".et-final-actions .final-project-link:not(.et-demo-link)");
+    const folderUrl = safeExternalUrl(finalProject.folderUrl);
+    if (folderLink) {
+      if (folderUrl) folderLink.href = folderUrl;
+      else folderLink.hidden = true;
+    }
+    const demoLink = document.getElementById("et-demo-link");
+    const demoUrl = safeExternalUrl(finalProject.demonstrationVideoUrl);
+    if (demoLink) {
+      if (demoUrl) demoLink.href = demoUrl;
+      else demoLink.hidden = true;
     }
   };
 
@@ -1161,6 +1306,7 @@
       renderEmploymentWorks();
       renderActivities();
       renderAiPortfolio(manifest);
+      renderEmergingPortfolio(manifest);
     } catch (error) {
       count.textContent = "CATALOGUE ERROR";
       list.innerHTML = "";

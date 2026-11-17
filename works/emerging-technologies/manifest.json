@@ -1,5 +1,17 @@
 {
   "subject": "emerging",
+  "course": {
+    "title": "Emerging Technologies",
+    "courseCode": "CPE C405-401G",
+    "studentName": "Carl Jhimuel Madanglog",
+    "program": "Bachelor of Science in Computer Engineering"
+  },
+  "aboutMe": {
+    "introduction": "I am Carl Jhimuel Madanglog, a Bachelor of Science in Computer Engineering student. This page documents my Emerging Technologies coursework and learning progress.",
+    "interests": [
+      "Multimedia and creative work, video editing, photography, cooking, and driving."
+    ]
+  },
   "works": [
     {
       "id": "anycompany-well-architecture",
@@ -76,5 +88,120 @@
       "description": "A group AWS total-cost-of-ownership case analysis covering cloud architecture, projected costs, and support options."
     }
   ],
-  "activities": []
+  "skills": [
+    {
+      "name": "AWS cloud architecture",
+      "category": "Cloud architecture",
+      "description": "The coursework applies the AWS Well-Architected Framework and documents a multi-subnet VPC design.",
+      "evidence": [
+        {
+          "file": "pdfs/MADANGLOG_AnyCompany_WellArchitecture.pdf",
+          "title": "AnyCompany: Well-Architected Case Study"
+        },
+        {
+          "file": "pdfs/MADANGLOG_BALUYOT_PTF1.drawio.pdf",
+          "title": "Baluyot PTF1: VPC Network Diagram"
+        }
+      ]
+    },
+    {
+      "name": "AWS networking and access control",
+      "category": "Cloud security",
+      "description": "Coursework documents VPC subnets and IAM permissions for users, groups, and resources.",
+      "evidence": [
+        {
+          "file": "pdfs/MADANGLOG_BALUYOT_PTF1.drawio.pdf",
+          "title": "Baluyot PTF1: VPC Network Diagram"
+        },
+        {
+          "file": "pdfs/MADANGLOG_PrelimLabAct1.pdf",
+          "title": "Prelim Lab Activity 1: IAM Permissions"
+        }
+      ]
+    },
+    {
+      "name": "AWS compute, databases, and containers",
+      "category": "Cloud services",
+      "description": "The archived exercise covers EC2 and RDS choices and an ECR, ECS, and Fargate deployment flow.",
+      "evidence": [
+        {
+          "file": "pdfs/PT3.2_Dockers&Containers_Madanglog.pdf",
+          "title": "PT 3.2: Dockers and Containers"
+        }
+      ]
+    },
+    {
+      "name": "Cloud storage selection",
+      "category": "AWS Core Services",
+      "description": "The case study compares S3, S3 Glacier, EFS, and EBS for a large-scale storage scenario.",
+      "evidence": [
+        {
+          "file": "pdfs/Madanglog_CaseStudy2_Emerging.pdf",
+          "title": "Case Study 2: Scalable Storage Architecture"
+        }
+      ]
+    },
+    {
+      "name": "Cloud cost estimation and analysis",
+      "category": "Pricing and Billing",
+      "description": "Coursework includes AWS Pricing Calculator estimates, regional and payment-option comparisons, and a total-cost-of-ownership analysis.",
+      "evidence": [
+        {
+          "file": "pdfs/PTF2_AWSPricingCal_Madanglog.pdf",
+          "title": "PTF2: AWS Pricing Calculator Estimate"
+        },
+        {
+          "file": "pdfs/PTF2_PricingCalculator_Madanglog.pdf",
+          "title": "PTF2: Pricing Calculator Analysis"
+        },
+        {
+          "file": "pdfs/PTS1_Group9_Madanglog, Mallari, Agrava.pdf",
+          "title": "PTS1 Group 9: AWS TCO Case Analysis"
+        }
+      ]
+    }
+  ],
+  "finalProject": {
+    "title": "AWS Architecture Project",
+    "subtitle": "Emerging Final Project",
+    "description": "An AWS-hosted student records site for XYZ University. The presentation documents an application tier across two Availability Zones, with an Application Load Balancer and EC2 Auto Scaling, plus a private RDS MySQL database.",
+    "objectives": [
+      "Learn how to build and configure cloud storage services."
+    ],
+    "technologies": [
+      "Amazon VPC with public and private subnets",
+      "Application Load Balancer",
+      "EC2 Auto Scaling with two t3.micro Linux instances",
+      "Amazon RDS for MySQL in a private database subnet group"
+    ],
+    "contribution": "Created instances, deployed them across two Availability Zones, and configured them to communicate with one another.",
+    "challenge": "Troubleshooting significant errors extended the activity over multiple days and took longer than expected.",
+    "reflection": "I learned how to set up a cloud database.",
+    "results": "The presentation reports that the student records site was live, a new student record was saved and listed, and data was stored in RDS.",
+    "costEstimate": "The AWS Pricing Calculator estimate reports USD 97.97 per month and USD 1,175.64 for 12 months. These are estimated costs, not actual charges.",
+    "folderUrl": "https://drive.google.com/drive/folders/1cckEsK4phh27c1tspBwfr6H_LkndOJMW?usp=sharing",
+    "evidence": [
+      {
+        "title": "Project presentation (7-page PDF)",
+        "url": "https://drive.google.com/file/d/1Th0qA-MXxZjosEenSni4epytoXVe3KTa/view?usp=sharing"
+      },
+      {
+        "title": "AWS Pricing Calculator estimate",
+        "url": "https://drive.google.com/file/d/1-kKNc9cLLF1GUvRwNiZSwpsqkRMqDp6W/view?usp=sharing"
+      },
+      {
+        "title": "Phase 1 evidence",
+        "url": "https://drive.google.com/drive/folders/1QNf02Uci-BSbXyiAjHe6S2pt9_EodApt"
+      },
+      {
+        "title": "Phase 2 evidence",
+        "url": "https://drive.google.com/drive/folders/1720U5OxX6Z4WBHEMdbmgfs4Zgj5wKnzt"
+      },
+      {
+        "title": "Phase 3 evidence",
+        "url": "https://drive.google.com/drive/folders/1gbmUbu_T2Y6XZlPUEH2GSFCmstKwMYjm"
+      }
+    ],
+    "demonstrationVideoUrl": "https://drive.google.com/file/d/1jQsbYRn8M5X8GElMtm8r6l8lGM9BfECp/view?usp=sharing"
+  }
 }
